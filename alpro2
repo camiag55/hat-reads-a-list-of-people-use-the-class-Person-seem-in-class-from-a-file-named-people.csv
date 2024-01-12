@@ -1,0 +1,52 @@
+
+import csv
+from collections import deque
+#class for person that has attributes for name,familymae, and age
+class Person:
+    def __init__(self,name,familyName,age):
+        self.name = name
+        self.familyName = familyName
+        self.age = age
+#list of people
+people_info = [
+    Person('Larry','Johnson',23),
+    Person('Carole','Poveda',22),
+    Person('Camila','Gonzalez',24),
+    Person('David','Lopez',45),
+    Person('Peter','Hills',95),
+    Person('Eric','Paz',54),
+    Person('Miriam','Barroso',72),
+    Person('Alexis','Pernas',50),
+    Person('Daniela','Febles',23),
+    Person('Kiara','Garcia',24),
+    Person('Sponge','Bob',45),
+    Person('Sebastion','Paz',29),
+    Person('Patrick','Star',54),
+    Person('Sandy','Cheeks',45),
+    Person('Peter','Hills',95)
+]
+
+#csv file
+with open ('people.csv','w',newline='') as csv_file:
+    csv_writer = csv.writer(csv_file)
+    csv_writer.writerow(['Name' + 'Family Name' + 'Age'])
+    for person in people_info:
+        csv_writer.writerow([person.name,person.familyName, person.age])
+speople = deque(people_info)
+#while loop that lets user input and prints out name from stack
+while speople:
+    try:
+        num = int(input('Enter a number from 1 to 4:'))
+        if 1 <= num <= 4:
+            for _ in range(num):
+                speople.pop()
+            if speople:
+                print(f"The remaining person:{speople[-1].name},{speople[-1].familyName}")
+            else:
+                print('There is no more names')
+        else:
+            print('Enter a number from 1 to 4')
+    except ValueError:
+        print('INVALID:Enter a number from 1 to 4')
+
+print('There is no more names')
